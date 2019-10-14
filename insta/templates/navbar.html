@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    {% if user.is_authenticated %}
+  <div class="container-fluid">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="">Home</a>
+        <a href="/accounts/password/change">Change Password</a>
+        <a href="/logout">Logout</a>
+    {% else %}
+        <a class='btn btn-default' href="/accounts/login">Login</a>
+    {% endif %}    
+    </div>
+  </div>
+ 
+      
+</nav>
+</body>
+</html>
+
+
+
