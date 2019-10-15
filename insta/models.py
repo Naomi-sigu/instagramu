@@ -10,7 +10,6 @@ class Image(models.Model):
   user = models.ForeignKey(User,on_delete = models.CASCADE)
 
 
-
   @classmethod
   def display_images(cls):
     images = cls.objects.all()
