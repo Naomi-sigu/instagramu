@@ -11,15 +11,21 @@
   <div class="container-fluid">
     <div class="navbar-header">
         <a class="navbar-brand" href="">Home</a>
-        <a href="/accounts/password/change">Change Password</a>
-        <a href="/logout">Logout</a>
+        <a class="navbar-brand" href="/accounts/password/change">Change Password</a>
+        <a class="navbar-brand" href="/logout">Logout</a>
     {% else %}
         <a class='btn btn-default' href="/accounts/login">Login</a>
     {% endif %}    
+    
+    <form class="mb-0 h1 ml-auto mr-auto" id="searchform" action="{% url 'search' %}" >
+      <input name="search_user" autocomplete="off" id="searching" class="form-control d-none d-md-block" placeholder="Search">
+      <i class="spinner "></i>
+    </form>
+
     </div>
   </div>
  
-      
+  
 </nav>
 </body>
 </html>
