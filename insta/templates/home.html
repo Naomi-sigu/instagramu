@@ -1,13 +1,57 @@
-{%extends 'base.html'%}
-
+{%extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
 {{block.super}}
   
-  <!--Display images  -->
-  {% for image in images %}
-  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-    <img src="{{image.image.url}}" class="img-responsive" alt="Image">
+  <!-- Display images  -->
+  {%for image in images%}
+    <div class="container">
+    <div class="row">
+        <div class="col-md-4">
+          <img src="{{image.image.url}}" class="img-responsive" alt="" > </a>
+        </div>
+    </div>
+   </div>
+  {%endfor %}
+
+<div class="col-md-3 " id="fix">
+  <div class="flex mt-3 pt-3 ml-3 pl-3">
+    <div>
+      <a href="{% url 'profile' %}"><img src="{{user.profile.profile_pic.url}}" class="rounded-circle border" alt="{{user.profile.name}}" width="80" height="80"></a>
+    </div>
+    <div>
+      <a href="{% url 'profile' %}"><h2 class="text-monospace ml-3 pt-2"><small><strong>{{user.username}}</strong></small></h2></a>
+    </div>
   </div>
-  <p></p>
-  {% endfor %}
+
+
+<div class="modal fade" id="post" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+    <div class="modal-body">
+      <form action="{% url 'new_post' %}" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+            <fieldset class="form-group">
+            {{post|crispy}}
+            </fieldset>
+            <div class="form-group">
+                <a href="{% url 'new_post' %}">
+                  <button class="btn btn-outline-info" type="submit">Post</button>
+                </a>
+            </div>
+            <div class="modal-header " id="md" >
+              <a href="#"  data-dismiss="modal">cancel</a>
+            </div>
+        </form>            
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
 {% endblock %}
+
+              
