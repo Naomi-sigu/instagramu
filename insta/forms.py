@@ -12,6 +12,11 @@ class Registration(UserCreationForm):
     fields = ['username','email','password1','password2']
 
 
+class NewPostForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        exclude = ['pub_date','image_profile']
+        
 class UpdateUser(forms.ModelForm):
   email = forms.EmailField()
   class Meta:
