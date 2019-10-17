@@ -55,7 +55,7 @@ class Comment(models.Model):
     return "%s comment" % self.image
 
 class Profile(models.Model):
-  profile_pic = models.ImageField(default='default.jpg',upload_to='profile/')
+  profile_pic = models.ImageField(default='default.jpg',upload_to='media/')
   bio = models.TextField()
   user = models.OneToOneField(User,on_delete = models.CASCADE)
 
