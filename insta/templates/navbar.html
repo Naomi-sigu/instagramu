@@ -6,27 +6,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<nav class="navbar navbar-inverse">  
-    {% if user.is_authenticated %}
-  <div class="container-fluid">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="">Home</a>
-        <a class="navbar-brand" href="/accounts/password/change">Change Password</a>
-        <a class="navbar-brand" href="/logout">Logout</a>
-    {% else %}
-        <a class='btn btn-default' href="/accounts/login">Login</a>
-    {% endif %}    
-    
+
+  <!--Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark primary-color">
+    <i class="fab fa-instagram fa-4x"></i>
+  <a class="navbar-brand" href="/">Insatgram</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
+    aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
+    <ul class="navbar-nav mr-auto">
+    </ul>
     <form class="mb-0 h1 ml-auto mr-auto" id="searchform" action="{% url 'search' %}" >
       <input name="search_user" autocomplete="off" id="searching" class="form-control d-none d-md-block" placeholder="Search">
       <i class="spinner "></i>
     </form>
-
-    </div>
+      <ul class="navbar-nav ml-auto nav-flex-icons">
+          <a class="nav-item nav-link" data-toggle="modal" data-target="#post" href="#">
+            <i class="fas fa-plus-circle" style="font-size: 30px;"></i>
+          </a>
+        <li class="nav-item avatar dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">MY ACCOUNT
+          </a>
+          <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+            aria-labelledby="navbarDropdownMenuLink-55">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="/accounts/password/change">Change Password</a>
+            <a class="dropdown-item" href="/logout">Logout</a>
+          </div>
+          <a class="nav-item nav-link" href="{% url 'profile' %}">
+            <svg aria-label="Profile" class="_8-yf5 " fill="#262626" height="24" viewBox="0 0 48 48" width="24"><g><path d="M24 27c-7.1 0-12.9-5.8-12.9-12.9s5.8-13 12.9-13c7.1 0 12.9 5.8 12.9 12.9S31.1 27 24 27zm0-22.9c-5.5 0-9.9 4.5-9.9 9.9s4.4 10 9.9 10 9.9-4.5 9.9-9.9-4.4-10-9.9-10zM44 46.9c-.8 0-1.5-.7-1.5-1.5V42c0-5-4-9-9-9h-19c-5 0-9 4-9 9v3.4c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5V42c0-6.6 5.4-12 12-12h19c6.6 0 12 5.4 12 12v3.4c0 .8-.7 1.5-1.5 1.5z"></path></g></svg>
+          </a>
+        </li>
+      </ul>
+    
   </div>
- 
-  
 </nav>
+<!--/.Navbar -->
+
 </body>
 </html>
 
