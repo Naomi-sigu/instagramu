@@ -8,6 +8,12 @@ urlpatterns=[
     url('^$',views.welcome,name = 'welcome'),
     url(r'^search/$',views.search,name='search'),
     url(r'^post_profile/(?P<pk>\d+)$',views.others_profile,name='others_profile'),
+    url('profile/',views.profile,name='profile'),
+    url('update/',views.update_profile,name='update_profile'),
+    url(r'^post/', views.new_post, name = 'new_post'),
+
+    
+    
 ]    
  
 if settings.DEBUG:
