@@ -23,8 +23,6 @@ class TestProfile(TestCase):
     pass
   def test_save_profile(self):
     pass
-  def test_delete_profile(self):
-    pass
   def test_update_bio(self):
     pass
 
@@ -35,6 +33,4 @@ class TestComments(TestCase):
   def setUp(self):
     pass
   def test_save_comment(self):
-    pass
-  def test_delete_comment(self):
     pass
