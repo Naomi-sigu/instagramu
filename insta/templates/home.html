@@ -4,25 +4,54 @@
 {{block.super}}
   
   <!-- Display images  -->
-  {%for image in images%}
-    <div class="container">
-    <div class="row">
-        <div class="col-md-4">
-          <img src="{{image.image.url}}" class="img-responsive" alt="" > </a>
+ 
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+        {% if images %}
+        {% for image in images %}
+        <div class="card mb-4 ">
+          <div class="card-header">
+              <div>
+                <a href="{% url 'profile' %}"><img src="{{user.profile.profile_pic.url}}" class="rounded-circle border" alt="{{user.profile.name}}" width="80" height="80"></a>
+                <p class="text-monospace ml-3 pt-2"><small><strong>{{image.user.username}}</strong></small></p>
+                <p class="text-monospace ml-3"><small>{{image.name}}</small></p>
+              </div>
+          </div>
+          <div class="card-body">
+            <img src="{{image.image.url}}" alt="" class="card-img">
+              <span class="card-text ml-2"> {{ image.description }} </span>
+              <form action="{%url 'welcome' %}" method="POST" class="form-group">
+                {% csrf_token %}
+                {{form|crispy}}
+                <input type="hidden" value="{{image.pk}}" name="image_id" id="">
+                <button class="btn btn-sm btn-info" >Comment</button>
+              </form>
+              {% for comment in comments %}
+              {% if image.pk == comment.image.pk %}
+              <p class="">{{comment.comment}}</p>
+              {% endif %}
+              {% endfor %}
+          </div>
         </div>
+          {% endfor %}
+        {% endif%} 
     </div>
-   </div>
-  {%endfor %}
+    <div class="col-md-6">
+        <div class="col-md-3 " id="fix">
+            <div class="flex mt-3 pt-3 ml-3 pl-3">
+              <div>
+                <a href="{% url 'profile' %}"><img src="{{user.profile.profile_pic.url}}" class="rounded-circle border" alt="{{user.profile.name}}" width="80" height="80"></a>
+              </div>
+              <div>
+                <a href="{% url 'profile' %}"><h2 class="text-monospace ml-3 pt-2"><small><strong>{{user.username}}</strong></small></h2></a>
+              </div>
+            </div>
+    </div>
+  </div> 
+</div>
 
-<div class="col-md-3 " id="fix">
-  <div class="flex mt-3 pt-3 ml-3 pl-3">
-    <div>
-      <a href="{% url 'profile' %}"><img src="{{user.profile.profile_pic.url}}" class="rounded-circle border" alt="{{user.profile.name}}" width="80" height="80"></a>
-    </div>
-    <div>
-      <a href="{% url 'profile' %}"><h2 class="text-monospace ml-3 pt-2"><small><strong>{{user.username}}</strong></small></h2></a>
-    </div>
-  </div>
+
 
 
 <div class="modal fade" id="post" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -36,7 +65,7 @@
             </fieldset>
             <div class="form-group">
                 <a href="{% url 'new_post' %}">
-                  <button class="btn btn-outline-info" type="submit">Post</button>
+                  <button class="btn btn-outline-info" type="submit">Create Post</button>
                 </a>
             </div>
             <div class="modal-header " id="md" >
