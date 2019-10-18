@@ -10,7 +10,30 @@ from django.contrib import messages
 @login_required(login_url='/accounts/login/')
 def welcome(request):
     images = Image.display_images()
-    return render(request, 'home.html', {"images":images})   
+    comments = Comment.objects.all()
+    users = User.objects.all()
+    current_user = request.user
+    if request.method == 'POST':
+      form = CommentForm(request.POST)
+      img_id = request.POST['image_id']
+      if form.is_valid():
+        comment = form.save(commit=False)
+        comment.user = current_user
+        image = Image.get_image(img_id)
+        comment.image = image
+        comment.save()
+      return redirect(f'/#{img_id}')
+    else:
+      form = CommentForm(auto_id=False)
+    
+    context = {
+      "images": images,
+      "form": form,
+      "comments": comments,
+      "users": users
+    }
+        
+    return render(request, 'home.html', context)
 
 
 
@@ -81,6 +104,28 @@ def new_post(request):
         form = NewPostForm()
         
     return render(request, 'posts.html', {'form': form})
+
+def register(request):
+
+   if request.method == 'POST':
+      form = Registration(request.POST)
+      if form.is_valid():
+         form.save()
+         username = form.cleaned_data.get('username')
+         raw_password = form.cleaned_data.get('password1')
+         user = authenticate(username=username, password=raw_password)
+         login(request, user)
+         user = User.objects.filter
+         return redirect('edit_profile')
+   else:
+      form = Registration()
+
+   context = {
+      'form': form
+   }
+
+   return render(request, 'registration/registration_form.html', context)
+
 
 
  
