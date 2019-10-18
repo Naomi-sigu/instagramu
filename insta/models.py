@@ -16,6 +16,14 @@ class Image(models.Model):
   def display_images(cls):
     images = cls.objects.all()
     return images
+  
+  @classmethod
+  def get_image(cls, id):
+    try :
+      image = Image.objects.get(pk=id)
+    except ObjectDoesNotExist:
+      raise Http404()
+    return image
 
   @property
   def all_comments(self):
@@ -42,7 +50,7 @@ class Like(models.Model):
     return "%s like" % self.image
 
 class Comment(models.Model):
-  comment = models.TextField()
+  comment = models.CharField(max_length=200)
   image = models.ForeignKey(Image,on_delete = models.CASCADE,related_name='comments')
   user = models.ForeignKey(User,on_delete = models.CASCADE,related_name='comments')
 
